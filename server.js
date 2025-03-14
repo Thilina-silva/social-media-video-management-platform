@@ -1,9 +1,32 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 
-// Serve static files from the dist directory
+// Middleware
+app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
+
+// OAuth callback endpoints
+app.get('/oauth/:platform/callback', (req, res) => {
+  const { platform } = req.params;
+  const { code, error } = req.query;
+
+  if (error) {
+    // Handle OAuth error
+    res.redirect(`/?error=${encodeURIComponent(error)}`);
+    return;
+  }
+
+  if (!code) {
+    res.redirect('/?error=No authorization code received');
+    return;
+  }
+
+  // Redirect back to the app with the authorization code
+  res.redirect(`/?platform=${platform}&code=${code}`);
+});
 
 // Ping endpoint to keep the site active
 app.get('/ping', (req, res) => {

@@ -29,6 +29,7 @@ import {
 } from '@mui/icons-material';
 import { StorageService } from '../services/storage';
 import { SocialMediaAccount } from '../types';
+import SocialMediaConnect from '../components/SocialMediaConnect';
 
 const Settings: React.FC = () => {
   const [socialAccounts, setSocialAccounts] = React.useState<SocialMediaAccount[]>([]);
@@ -115,6 +116,12 @@ const Settings: React.FC = () => {
       </Typography>
 
       <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper sx={{ p: 2 }}>
+            <SocialMediaConnect onAccountConnected={loadSettings} />
+          </Paper>
+        </Grid>
+
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 2 }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
