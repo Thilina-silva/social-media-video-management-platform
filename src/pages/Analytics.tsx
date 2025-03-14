@@ -18,7 +18,6 @@ import {
   InputLabel,
 } from '@mui/material';
 import {
-  TrendingUp as TrendingIcon,
   Visibility as ViewsIcon,
   ThumbUp as LikesIcon,
   Comment as CommentsIcon,

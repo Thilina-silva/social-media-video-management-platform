@@ -7,14 +7,14 @@ interface SocialMediaAPI {
 }
 
 class YouTubeAPI implements SocialMediaAPI {
-  async uploadVideo(video: VideoPost, account: SocialMediaAccount): Promise<string> {
+  async uploadVideo(video: VideoPost, _account: SocialMediaAccount): Promise<string> {
     // Implement YouTube API upload
     // This would use the YouTube Data API v3
     console.log('Uploading to YouTube:', video.title);
     return 'youtube-video-id';
   }
 
-  async getAnalytics(videoId: string, account: SocialMediaAccount): Promise<any> {
+  async getAnalytics(videoId: string, _account: SocialMediaAccount): Promise<any> {
     // Implement YouTube Analytics API
     console.log('Getting YouTube analytics for:', videoId);
     return {
@@ -34,13 +34,13 @@ class YouTubeAPI implements SocialMediaAPI {
 }
 
 class InstagramAPI implements SocialMediaAPI {
-  async uploadVideo(video: VideoPost, account: SocialMediaAccount): Promise<string> {
+  async uploadVideo(video: VideoPost, _account: SocialMediaAccount): Promise<string> {
     // Implement Instagram Graph API upload
     console.log('Uploading to Instagram:', video.title);
     return 'instagram-video-id';
   }
 
-  async getAnalytics(videoId: string, account: SocialMediaAccount): Promise<any> {
+  async getAnalytics(videoId: string, _account: SocialMediaAccount): Promise<any> {
     // Implement Instagram Graph API analytics
     console.log('Getting Instagram analytics for:', videoId);
     return {
@@ -60,13 +60,13 @@ class InstagramAPI implements SocialMediaAPI {
 }
 
 class TwitterAPI implements SocialMediaAPI {
-  async uploadVideo(video: VideoPost, account: SocialMediaAccount): Promise<string> {
+  async uploadVideo(video: VideoPost, _account: SocialMediaAccount): Promise<string> {
     // Implement Twitter API upload
     console.log('Uploading to Twitter:', video.title);
     return 'twitter-video-id';
   }
 
-  async getAnalytics(videoId: string, account: SocialMediaAccount): Promise<any> {
+  async getAnalytics(videoId: string, _account: SocialMediaAccount): Promise<any> {
     // Implement Twitter API analytics
     console.log('Getting Twitter analytics for:', videoId);
     return {

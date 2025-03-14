@@ -4,10 +4,6 @@ import {
   Typography,
   Paper,
   Grid,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
   List,
   ListItem,
   ListItemText,
@@ -20,9 +16,9 @@ import {
   DialogActions,
   TextField,
   Switch,
-  FormControlLabel,
   Divider,
   MenuItem,
+  Button,
 } from '@mui/material';
 import {
   YouTube as YouTubeIcon,
@@ -32,10 +28,9 @@ import {
   Add as AddIcon,
 } from '@mui/icons-material';
 import { StorageService } from '../services/storage';
-import { SocialMediaAccount, UserSettings } from '../types';
+import { SocialMediaAccount } from '../types';
 
 const Settings: React.FC = () => {
-  const [userSettings, setUserSettings] = React.useState<UserSettings | null>(null);
   const [socialAccounts, setSocialAccounts] = React.useState<SocialMediaAccount[]>([]);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [selectedAccount, setSelectedAccount] = React.useState<SocialMediaAccount | null>(null);
@@ -51,9 +46,7 @@ const Settings: React.FC = () => {
   }, []);
 
   const loadSettings = () => {
-    const settings = StorageService.getUserSettings();
     const accounts = StorageService.getSocialAccounts();
-    setUserSettings(settings);
     setSocialAccounts(accounts);
   };
 

@@ -13,7 +13,6 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  MenuItem,
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -23,7 +22,6 @@ import { VideoPost } from '../types';
 
 const Schedule: React.FC = () => {
   const [videos, setVideos] = React.useState<VideoPost[]>([]);
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date());
   const [openDialog, setOpenDialog] = React.useState(false);
   const [selectedVideo, setSelectedVideo] = React.useState<VideoPost | null>(null);
   const [scheduledDate, setScheduledDate] = React.useState<Date | null>(new Date());
@@ -50,26 +48,15 @@ const Schedule: React.FC = () => {
 
   const handleSaveSchedule = () => {
     if (selectedVideo && scheduledDate) {
-      const updatedVideo = {
+      const updatedVideo: VideoPost = {
         ...selectedVideo,
         scheduledDate: scheduledDate.toISOString(),
-        status: 'scheduled',
+        status: 'scheduled' as const,
       };
       StorageService.saveVideoPost(updatedVideo);
       loadVideos();
     }
     handleCloseDialog();
-  };
-
-  const getVideosForDate = (date: Date) => {
-    return videos.filter((video) => {
-      const videoDate = new Date(video.scheduledDate);
-      return (
-        videoDate.getDate() === date.getDate() &&
-        videoDate.getMonth() === date.getMonth() &&
-        videoDate.getFullYear() === date.getFullYear()
-      );
-    });
   };
 
   return (
@@ -84,7 +71,6 @@ const Schedule: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Calendar View
             </Typography>
-            {/* Calendar component would go here */}
             <Box sx={{ height: 400, border: '1px solid #ccc', borderRadius: 1, p: 2 }}>
               <Typography variant="body1" color="text.secondary">
                 Calendar View (To be implemented)
@@ -140,7 +126,7 @@ const Schedule: React.FC = () => {
                   label="Schedule Date & Time"
                   value={scheduledDate}
                   onChange={(newValue) => setScheduledDate(newValue)}
-                  renderInput={(params) => <TextField {...params} fullWidth margin="dense" />}
+                  slotProps={{ textField: { fullWidth: true, margin: "dense" } }}
                 />
               </LocalizationProvider>
             </>
